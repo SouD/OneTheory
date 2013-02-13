@@ -1,0 +1,4 @@
+*.class
+
+# Ignore DBC files #
+*.dbc
