@@ -200,8 +200,10 @@ public class SpellEntry {
 		schoolMask = 0;
 	}
 	
-	public SpellEntry(int index, DBCRecord dbc) {
-		System.out.println("Not yet implemented!");
+	public SpellEntry(int id, DBCRecord dbc) {
+		int index = dbc.findIndexByID(id);
+		System.out.println("input id: " + id);
+		System.out.println("found at index: " + index);
 	}
 
 	public int getID() {

@@ -19,7 +19,7 @@ public class OneTheory {
 			config.load(stream);
 			DBCStorage<SpellEntry> spellStore = new DBCStorage<>(new SpellEntry.Factory(), config.getProperty("DBC_PATH"));
 			spellStore.load("Spell.dbc", "");
-			SpellEntry foo = spellStore.lookupEntry(1);
+			SpellEntry foo = spellStore.lookupEntry(27209);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

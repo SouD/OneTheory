@@ -15,6 +15,7 @@ public class DBCRecord {
 	private byte[] data;
 	private byte[] strBlock;
 	private String fmt;
+	private int[] index;
 	
 	public DBCRecord(ByteBuffer bb, String fmt) {
 		this.fmt = fmt;
@@ -37,6 +38,13 @@ public class DBCRecord {
 		
 		//Field length always (?) 4 bytes each
 		fieldLen = rowSize / numRows;
+		
+		//Create index of IDs
+		index = new int[numRows];
+		for (int i = 0; i < numRows; i++) {
+			index[i] = getInt(i, 0); //0 is ID field
+		}
+		Arrays.sort(index);
 	}
 	
 	public byte[] getRow(int index) {
@@ -62,6 +70,10 @@ public class DBCRecord {
 		int to = from;
 		while(strBlock[to++] != 0) { /* Find null termination */ }
 		return new String(Arrays.copyOfRange(strBlock, from, to)).trim();
+	}
+	
+	public int findIndexByID(int id) {
+		return Arrays.binarySearch(index, id);
 	}
 
 	public String getSignature() {

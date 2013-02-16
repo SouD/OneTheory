@@ -38,8 +38,7 @@ public class DBCStorage<T> {
 	}
 	
 	public T lookupEntry(int id) {
-		// TODO: Find index of id
-		return factory.create(0, dbc);
+		return factory.create(id, dbc);
 	}
 	
 	public String getDBCPath() {
