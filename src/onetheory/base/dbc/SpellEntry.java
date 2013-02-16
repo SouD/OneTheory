@@ -200,10 +200,9 @@ public class SpellEntry {
 		schoolMask = 0;
 	}
 	
-	public SpellEntry(int id, DBCRecord dbc) {
-		int index = dbc.findIndexByID(id);
-		System.out.println("input id: " + id);
-		System.out.println("found at index: " + index);
+	public SpellEntry(int index, DBCRecord dbc) {
+		ID = dbc.getInt(index, 0);
+		//TODO: Init properties with values from dbc
 	}
 
 	public int getID() {
@@ -378,7 +377,7 @@ public class SpellEntry {
 		return totems;
 	}
 	
-	public int getTotem(int index) throws ArrayIndexOutOfBoundsException {
+	public int getTotem(int index) {
 		return totems[index];
 	}
 
@@ -386,7 +385,7 @@ public class SpellEntry {
 		return reagents;
 	}
 	
-	public int getReagent(int index) throws ArrayIndexOutOfBoundsException {
+	public int getReagent(int index) {
 		return reagents[index];
 	}
 
@@ -394,7 +393,7 @@ public class SpellEntry {
 		return reagentCounts;
 	}
 	
-	public int getReagentCount(int index) throws ArrayIndexOutOfBoundsException {
+	public int getReagentCount(int index) {
 		return reagentCounts[index];
 	}
 
@@ -414,7 +413,7 @@ public class SpellEntry {
 		return effects;
 	}
 	
-	public int getEffect(int index) throws ArrayIndexOutOfBoundsException {
+	public int getEffect(int index) {
 		return effects[index];
 	}
 
@@ -422,7 +421,7 @@ public class SpellEntry {
 		return effectDieSides;
 	}
 	
-	public int getEffectDiceSide(int index)  throws ArrayIndexOutOfBoundsException {
+	public int getEffectDiceSide(int index)  {
 		return effectDieSides[index];
 	}
 
@@ -430,7 +429,7 @@ public class SpellEntry {
 		return effectBaseDie;
 	}
 	
-	public int getEffectBaseDice(int index) throws ArrayIndexOutOfBoundsException {
+	public int getEffectBaseDice(int index) {
 		return effectBaseDie[index];
 	}
 
@@ -438,7 +437,7 @@ public class SpellEntry {
 		return effectDicePerLevel;
 	}
 	
-	public float getEffectDicePerLevel(int index) throws ArrayIndexOutOfBoundsException {
+	public float getEffectDicePerLevel(int index) {
 		return effectDicePerLevel[index];
 	}
 
@@ -446,7 +445,7 @@ public class SpellEntry {
 		return effectRealPointsPerLevel;
 	}
 	
-	public float getEffectRealPointsPerLevel(int index) throws ArrayIndexOutOfBoundsException {
+	public float getEffectRealPointsPerLevel(int index) {
 		return effectRealPointsPerLevel[index];
 	}
 
@@ -454,7 +453,7 @@ public class SpellEntry {
 		return effectBasePoints;
 	}
 	
-	public int getEffectBasePoints(int index) throws ArrayIndexOutOfBoundsException {
+	public int getEffectBasePoints(int index) {
 		return effectBasePoints[index];
 	}
 
@@ -462,7 +461,7 @@ public class SpellEntry {
 		return effectMechanics;
 	}
 	
-	public int getEffectMechanic(int index) throws ArrayIndexOutOfBoundsException {
+	public int getEffectMechanic(int index) {
 		return effectMechanics[index];
 	}
 
@@ -470,7 +469,7 @@ public class SpellEntry {
 		return effectImplicitTargetsA;
 	}
 	
-	public int getEffectImplicitTargetA(int index) throws ArrayIndexOutOfBoundsException {
+	public int getEffectImplicitTargetA(int index) {
 		return effectImplicitTargetsA[index];
 	}
 
@@ -478,7 +477,7 @@ public class SpellEntry {
 		return effectImplicitTargetsB;
 	}
 	
-	public int getEffectImplicitTargetB(int index) throws ArrayIndexOutOfBoundsException {
+	public int getEffectImplicitTargetB(int index) {
 		return effectImplicitTargetsB[index];
 	}
 
@@ -486,7 +485,7 @@ public class SpellEntry {
 		return effectRadiusIndices;
 	}
 	
-	public int getEffectRadiusIndex(int index) throws ArrayIndexOutOfBoundsException {
+	public int getEffectRadiusIndex(int index) {
 		return effectRadiusIndices[index];
 	}
 
@@ -494,7 +493,7 @@ public class SpellEntry {
 		return effectApplyAuraName;
 	}
 	
-	public int getEffectApplyAuraName(int index) throws ArrayIndexOutOfBoundsException {
+	public int getEffectApplyAuraName(int index) {
 		return effectApplyAuraName[index];
 	}
 
@@ -502,7 +501,7 @@ public class SpellEntry {
 		return effectAmplitudes;
 	}
 	
-	public int getEffectAmplitude(int index) throws ArrayIndexOutOfBoundsException {
+	public int getEffectAmplitude(int index) {
 		return effectAmplitudes[index];
 	}
 
@@ -510,7 +509,7 @@ public class SpellEntry {
 		return effectMultipleValues;
 	}
 	
-	public float getEffectMultipleValue(int index) throws ArrayIndexOutOfBoundsException {
+	public float getEffectMultipleValue(int index) {
 		return effectMultipleValues[index];
 	}
 
@@ -518,7 +517,7 @@ public class SpellEntry {
 		return effectChainTargets;
 	}
 	
-	public int getEffectChainTarget(int index) throws ArrayIndexOutOfBoundsException {
+	public int getEffectChainTarget(int index) {
 		return effectChainTargets[index];
 	}
 
@@ -526,7 +525,7 @@ public class SpellEntry {
 		return effectItemTypes;
 	}
 	
-	public int getEffectItemType(int index) throws ArrayIndexOutOfBoundsException {
+	public int getEffectItemType(int index) {
 		return effectItemTypes[index];
 	}
 
@@ -534,7 +533,7 @@ public class SpellEntry {
 		return effectMiscValues;
 	}
 	
-	public int getEffectMiscValue(int index) throws ArrayIndexOutOfBoundsException {
+	public int getEffectMiscValue(int index) {
 		return effectMiscValues[index];
 	}
 
@@ -542,7 +541,7 @@ public class SpellEntry {
 		return effectMiscValuesB;
 	}
 	
-	public int getEffectMiscValueB(int index) throws ArrayIndexOutOfBoundsException {
+	public int getEffectMiscValueB(int index) {
 		return effectMiscValuesB[index];
 	}
 
@@ -550,7 +549,7 @@ public class SpellEntry {
 		return effectTriggerSpells;
 	}
 	
-	public int getEffectTriggerSpells(int index) throws ArrayIndexOutOfBoundsException {
+	public int getEffectTriggerSpells(int index) {
 		return effectTriggerSpells[index];
 	}
 
@@ -558,7 +557,7 @@ public class SpellEntry {
 		return effectPointsPerComboPoint;
 	}
 	
-	public float getEffectPointsPerComboPoints(int index) throws ArrayIndexOutOfBoundsException {
+	public float getEffectPointsPerComboPoints(int index) {
 		return effectPointsPerComboPoint[index];
 	}
 
@@ -658,7 +657,7 @@ public class SpellEntry {
 		return dmgMultipliers;
 	}
 	
-	public int getDmgMultiplier(int index) throws ArrayIndexOutOfBoundsException {
+	public int getDmgMultiplier(int index) {
 		return dmgMultipliers[index];
 	}
 
@@ -678,7 +677,7 @@ public class SpellEntry {
 		return totemCategories;
 	}
 	
-	public int getTotemCategory(int index) throws ArrayIndexOutOfBoundsException {
+	public int getTotemCategory(int index) {
 		return totemCategories[index];
 	}
 
