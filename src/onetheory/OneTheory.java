@@ -18,10 +18,12 @@ public class OneTheory {
 		try {
 			config.load(stream);
 			DBCStorage<SpellEntry> spellStore = new DBCStorage<>(new SpellEntry.Factory(), config.getProperty("DBC_PATH"));
-			spellStore.load("Spell.dbc", "");
+			spellStore.load("Spell.dbc");
 			SpellEntry foo = spellStore.lookupEntry(53085);
 			if (foo != null) {
 				System.out.println("DBC up to date");
+				foo = spellStore.lookupEntry(27209);
+				System.out.println(foo.getSpellName());
 			} else {
 				System.out.println("DBC not up to date");
 			}

@@ -5,5 +5,7 @@ public class DBC {
 	public static final int MAX_TOTEM_INDEX = 2;
 	public static final int MAX_REAGENT_INDEX = 8;
 	
+	public static final String SPELL_ENTRY_FMT = "nixiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiifxiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiffffffiiiiiiiiiiiiiiiiiiiiifffiiiiiiiiiiiiiiifffixiixssssssssssssssssxssssssssssssssssxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxiiiiiiiiiixfffxxxiiii";
+	
 	private DBC() {}
 }
