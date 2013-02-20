@@ -4,7 +4,6 @@ public class SpellEntry {
 	
 	private int ID;
 	private int category;
-	private int castUI;
 	private int dispel;
 	private int mechanic;
 	private int attributes;
@@ -42,7 +41,6 @@ public class SpellEntry {
 	private int manaPerSecondLevel;
 	private int rangeIndex;
 	private float speed;
-	private int modalNextSpell;
 	private int stackAmount;
 	private int[] totems;
 	private int[] reagents;
@@ -70,135 +68,25 @@ public class SpellEntry {
 	private int[] effectTriggerSpells;
 	private float[] effectPointsPerComboPoint;
 	private int spellVisual;
-	private int spellVisual2;
 	private int spellIconID;
 	private int activeIconID;
-	private int spellPriority;
 	private String spellName;
-	private int spellNameFlag;
 	private String rank;
-	private int rankFlags;
 	private String description;
-	private int descriptionFlags;
 	private String tooltip;
-	private int tooltipFlags;
 	private int manaCostPercentage;
 	private int startRecoveryCategory;
 	private int startRecoveryTime;
 	private int maxTargetLevel;
 	private int spellFamilyName;
-	private int spellFamilyFlags;
+	private long spellFamilyFlags;
 	private int maxAffectedTargets;
 	private int dmgClass;
 	private int preventionType;
-	private int stanceBarOrder;
 	private int[] dmgMultipliers;
-	private int minFactionID;
-	private int minReputation;
-	private int requiredAuraVision;
 	private int[] totemCategories;
 	private int areaID;
 	private int schoolMask;
-	
-	public SpellEntry() {
-		ID = 0;
-		category = 0;
-		castUI = 0;
-		dispel = 0;
-		mechanic = 0;
-		attributes = 0;
-		attributesEx = 0;
-		attributesEx2 = 0;
-		attributesEx3 = 0;
-		attributesEx4 = 0;
-		attributesEx5 = 0;
-		attributesEx6 = 0;
-		stances = 0;
-		stancesNot = 0;
-		targets = 0;
-		targetCreatureType = 0;
-		requireSpellFocus = 0;
-		facingCasterFlags = 0;
-		casterAuraState = 0;
-		targetAuraState = 0;
-		castingTimeIndex = 0;
-		recoveryTime = 0;
-		categoryRecoveryTime = 0;
-		interruptFlags = 0;
-		auraInterruptFlags = 0;
-		channelInterruptFlags = 0;
-		procFlags = 0;
-		procChance = 0;
-		procCharges = 0;
-		maxLevel = 0;
-		baseLevel = 0;
-		spellLevel = 0;
-		durationIndex = 0;
-		powerType = 0;
-		manaCost = 0;
-		manaCostPerLevel = 0;
-		manaPerSecond = 0;
-		manaPerSecondLevel = 0;
-		rangeIndex = 0;
-		speed = 0.0f;
-		modalNextSpell = 0;
-		stackAmount = 0;
-		totems = new int[DBC.MAX_TOTEM_INDEX];
-		reagents = new int[DBC.MAX_REAGENT_INDEX];
-		reagentCounts = new int[DBC.MAX_REAGENT_INDEX];
-		equippedItemClass = 0;
-		equippedItemSubClassMask = 0;
-		equippedItemInventoryTypeMask = 0;
-		effects = new int[DBC.MAX_EFFECT_INDEX];
-		effectDieSides = new int[DBC.MAX_EFFECT_INDEX];
-		effectBaseDie = new int[DBC.MAX_EFFECT_INDEX];
-		effectDicePerLevel = new float[DBC.MAX_EFFECT_INDEX];
-		effectRealPointsPerLevel = new float[DBC.MAX_EFFECT_INDEX];
-		effectBasePoints = new int[DBC.MAX_EFFECT_INDEX];
-		effectMechanics = new int[DBC.MAX_EFFECT_INDEX];
-		effectImplicitTargetsA = new int[DBC.MAX_EFFECT_INDEX];
-		effectImplicitTargetsB = new int[DBC.MAX_EFFECT_INDEX];
-		effectRadiusIndices = new int[DBC.MAX_EFFECT_INDEX];
-		effectApplyAuraName = new int[DBC.MAX_EFFECT_INDEX];
-		effectAmplitudes = new int[DBC.MAX_EFFECT_INDEX];
-		effectMultipleValues = new float[DBC.MAX_EFFECT_INDEX];
-		effectChainTargets = new int[DBC.MAX_EFFECT_INDEX];
-		effectItemTypes = new int[DBC.MAX_EFFECT_INDEX];
-		effectMiscValues = new int[DBC.MAX_EFFECT_INDEX];
-		effectMiscValuesB = new int[DBC.MAX_EFFECT_INDEX];
-		effectTriggerSpells = new int [DBC.MAX_EFFECT_INDEX];
-		effectPointsPerComboPoint = new float[DBC.MAX_EFFECT_INDEX];
-		spellVisual = 0;
-		spellVisual2 = 0;
-		spellIconID = 0;
-		activeIconID = 0;
-		spellPriority = 0;
-		spellName = "Unknown";
-		spellNameFlag = 0;
-		rank = "";
-		rankFlags = 0;
-		description = "";
-		descriptionFlags = 0;
-		tooltip = "";
-		tooltipFlags = 0;
-		manaCostPercentage = 0;
-		startRecoveryCategory = 0;
-		startRecoveryTime = 0;
-		maxTargetLevel = 0;
-		spellFamilyName = 0;
-		spellFamilyFlags = 0;
-		maxAffectedTargets = 0;
-		dmgClass = 0;
-		preventionType = 0;
-		stanceBarOrder = 0;
-		dmgMultipliers = new int[DBC.MAX_EFFECT_INDEX];
-		minFactionID = 0;
-		minReputation = 0;
-		requiredAuraVision = 0;
-		totemCategories = new int[DBC.MAX_TOTEM_INDEX];
-		areaID = 0;
-		schoolMask = 0;
-	}
 	
 	public SpellEntry(int index, DBCRecord dbc) throws DBCException {
 		if (dbc.getNumCols() != 216) { //Spell.dbc need 216 fields for a SpellEntry
@@ -208,7 +96,7 @@ public class SpellEntry {
 		//TODO: Finish constructor
 		ID = dbc.getInt(index, 0);
 		category = dbc.getInt(index, 1);
-		castUI = dbc.getInt(index, 2);
+		//castUI = dbc.getInt(index, 2);
 		dispel = dbc.getInt(index, 3);
 		mechanic = dbc.getInt(index, 4);
 		attributes = dbc.getInt(index, 5);
@@ -223,86 +111,196 @@ public class SpellEntry {
 		targets = dbc.getInt(index, 14);
 		targetCreatureType = dbc.getInt(index, 15);
 		requireSpellFocus = dbc.getInt(index, 16);
-		facingCasterFlags = 0;
-		casterAuraState = 0;
-		targetAuraState = 0;
-		castingTimeIndex = 0;
-		recoveryTime = 0;
-		categoryRecoveryTime = 0;
-		interruptFlags = 0;
-		auraInterruptFlags = 0;
-		channelInterruptFlags = 0;
-		procFlags = 0;
-		procChance = 0;
-		procCharges = 0;
-		maxLevel = 0;
-		baseLevel = 0;
-		spellLevel = 0;
-		durationIndex = 0;
-		powerType = 0;
-		manaCost = 0;
-		manaCostPerLevel = 0;
-		manaPerSecond = 0;
-		manaPerSecondLevel = 0;
-		rangeIndex = 0;
-		speed = 0.0f;
-		modalNextSpell = 0;
-		stackAmount = 0;
+		facingCasterFlags = dbc.getInt(index, 17);
+		casterAuraState = dbc.getInt(index, 18);
+		targetAuraState = dbc.getInt(index, 19);
+		//casterAuraStateNot = dbc.getInt(index, 20);
+		//targetAuraStateNot = dbc.getInt(index, 21);
+		castingTimeIndex = dbc.getInt(index, 22);
+		recoveryTime = dbc.getInt(index, 23);
+		categoryRecoveryTime = dbc.getInt(index, 24);
+		interruptFlags = dbc.getInt(index, 25);
+		auraInterruptFlags = dbc.getInt(index, 26);
+		channelInterruptFlags = dbc.getInt(index, 27);
+		procFlags = dbc.getInt(index, 28);
+		procChance = dbc.getInt(index, 29);
+		procCharges = dbc.getInt(index, 30);
+		maxLevel = dbc.getInt(index, 31);
+		baseLevel = dbc.getInt(index, 32);
+		spellLevel = dbc.getInt(index, 33);
+		durationIndex = dbc.getInt(index, 34);
+		powerType = dbc.getInt(index, 35);
+		manaCost = dbc.getInt(index, 36);
+		manaCostPerLevel = dbc.getInt(index, 37);
+		manaPerSecond = dbc.getInt(index, 38);
+		manaPerSecondLevel = dbc.getInt(index, 39);
+		rangeIndex = dbc.getInt(index, 40);
+		speed = dbc.getFloat(index, 41);
+		//modalNextSpell = dbc.getInt(index, 42);
+		stackAmount = dbc.getInt(index, 43);
+		
 		totems = new int[DBC.MAX_TOTEM_INDEX];
+		totems[0] = dbc.getInt(index, 44);
+		totems[1] = dbc.getInt(index, 45);
+		
 		reagents = new int[DBC.MAX_REAGENT_INDEX];
+		reagents[0] = dbc.getInt(index, 46);
+		reagents[1] = dbc.getInt(index, 47);
+		reagents[2] = dbc.getInt(index, 48);
+		reagents[3] = dbc.getInt(index, 49);
+		reagents[4] = dbc.getInt(index, 50);
+		reagents[5] = dbc.getInt(index, 51);
+		reagents[6] = dbc.getInt(index, 52);
+		reagents[7] = dbc.getInt(index, 53);
+		
 		reagentCounts = new int[DBC.MAX_REAGENT_INDEX];
-		equippedItemClass = 0;
-		equippedItemSubClassMask = 0;
-		equippedItemInventoryTypeMask = 0;
+		reagentCounts[0] = dbc.getInt(index, 54);
+		reagentCounts[1] = dbc.getInt(index, 55);
+		reagentCounts[2] = dbc.getInt(index, 56);
+		reagentCounts[3] = dbc.getInt(index, 57);
+		reagentCounts[4] = dbc.getInt(index, 58);
+		reagentCounts[5] = dbc.getInt(index, 59);
+		reagentCounts[6] = dbc.getInt(index, 60);
+		reagentCounts[7] = dbc.getInt(index, 61);
+		
+		equippedItemClass = dbc.getInt(index, 62);
+		equippedItemSubClassMask = dbc.getInt(index, 63);
+		equippedItemInventoryTypeMask = dbc.getInt(index, 64);
+		
 		effects = new int[DBC.MAX_EFFECT_INDEX];
+		effects[0] = dbc.getInt(index, 65);
+		effects[1] = dbc.getInt(index, 66);
+		effects[2] = dbc.getInt(index, 67);
+		
 		effectDieSides = new int[DBC.MAX_EFFECT_INDEX];
+		effectDieSides[0] = dbc.getInt(index, 68);
+		effectDieSides[1] = dbc.getInt(index, 69);
+		effectDieSides[2] = dbc.getInt(index, 70);
+		
 		effectBaseDie = new int[DBC.MAX_EFFECT_INDEX];
+		effectBaseDie[0] = dbc.getInt(index, 71);
+		effectBaseDie[1] = dbc.getInt(index, 72);
+		effectBaseDie[2] = dbc.getInt(index, 73);
+		
 		effectDicePerLevel = new float[DBC.MAX_EFFECT_INDEX];
+		effectDicePerLevel[0] = dbc.getFloat(index, 74);
+		effectDicePerLevel[1] = dbc.getFloat(index, 75);
+		effectDicePerLevel[2] = dbc.getFloat(index, 76);
+		
 		effectRealPointsPerLevel = new float[DBC.MAX_EFFECT_INDEX];
+		effectRealPointsPerLevel[0] = dbc.getFloat(index, 77);
+		effectRealPointsPerLevel[1] = dbc.getFloat(index, 78);
+		effectRealPointsPerLevel[2] = dbc.getFloat(index, 79);
+		
 		effectBasePoints = new int[DBC.MAX_EFFECT_INDEX];
+		effectBasePoints[0] = dbc.getInt(index, 80);
+		effectBasePoints[1] = dbc.getInt(index, 81);
+		effectBasePoints[2] = dbc.getInt(index, 82);
+		
 		effectMechanics = new int[DBC.MAX_EFFECT_INDEX];
+		effectMechanics[0] = dbc.getInt(index, 83);
+		effectMechanics[1] = dbc.getInt(index, 84);
+		effectMechanics[2] = dbc.getInt(index, 85);
+		
 		effectImplicitTargetsA = new int[DBC.MAX_EFFECT_INDEX];
+		effectImplicitTargetsA[0] = dbc.getInt(index, 86);
+		effectImplicitTargetsA[1] = dbc.getInt(index, 87);
+		effectImplicitTargetsA[2] = dbc.getInt(index, 88);
+		
 		effectImplicitTargetsB = new int[DBC.MAX_EFFECT_INDEX];
+		effectImplicitTargetsB[0] = dbc.getInt(index, 89);
+		effectImplicitTargetsB[1] = dbc.getInt(index, 90);
+		effectImplicitTargetsB[2] = dbc.getInt(index, 91);
+		
 		effectRadiusIndices = new int[DBC.MAX_EFFECT_INDEX];
+		effectRadiusIndices[0] = dbc.getInt(index, 92);
+		effectRadiusIndices[1] = dbc.getInt(index, 93);
+		effectRadiusIndices[2] = dbc.getInt(index, 94);
+		
 		effectApplyAuraName = new int[DBC.MAX_EFFECT_INDEX];
+		effectApplyAuraName[0] = dbc.getInt(index, 95);
+		effectApplyAuraName[1] = dbc.getInt(index, 96);
+		effectApplyAuraName[2] = dbc.getInt(index, 97);
+		
 		effectAmplitudes = new int[DBC.MAX_EFFECT_INDEX];
+		effectAmplitudes[0] = dbc.getInt(index, 98);
+		effectAmplitudes[1] = dbc.getInt(index, 99);
+		effectAmplitudes[2] = dbc.getInt(index, 100);
+		
 		effectMultipleValues = new float[DBC.MAX_EFFECT_INDEX];
+		effectMultipleValues[0] = dbc.getFloat(index, 101);
+		effectMultipleValues[1] = dbc.getFloat(index, 102);
+		effectMultipleValues[2] = dbc.getFloat(index, 103);
+		
 		effectChainTargets = new int[DBC.MAX_EFFECT_INDEX];
+		effectChainTargets[0] = dbc.getInt(index, 104);
+		effectChainTargets[1] = dbc.getInt(index, 105);
+		effectChainTargets[2] = dbc.getInt(index, 106);
+		
 		effectItemTypes = new int[DBC.MAX_EFFECT_INDEX];
+		effectItemTypes[0] = dbc.getInt(index, 107);
+		effectItemTypes[1] = dbc.getInt(index, 108);
+		effectItemTypes[2] = dbc.getInt(index, 109);
+		
 		effectMiscValues = new int[DBC.MAX_EFFECT_INDEX];
+		effectMiscValues[0] = dbc.getInt(index, 110);
+		effectMiscValues[1] = dbc.getInt(index, 111);
+		effectMiscValues[2] = dbc.getInt(index, 112);
+		
 		effectMiscValuesB = new int[DBC.MAX_EFFECT_INDEX];
+		effectMiscValuesB[0] = dbc.getInt(index, 113);
+		effectMiscValuesB[1] = dbc.getInt(index, 114);
+		effectMiscValuesB[2] = dbc.getInt(index, 115);
+		
 		effectTriggerSpells = new int [DBC.MAX_EFFECT_INDEX];
+		effectTriggerSpells[0] = dbc.getInt(index, 116);
+		effectTriggerSpells[1] = dbc.getInt(index, 117);
+		effectTriggerSpells[2] = dbc.getInt(index, 118);
+		
 		effectPointsPerComboPoint = new float[DBC.MAX_EFFECT_INDEX];
-		spellVisual = 0;
-		spellVisual2 = 0;
-		spellIconID = 0;
-		activeIconID = 0;
-		spellPriority = 0;
-		spellName = dbc.getString(index, 127);
-		spellNameFlag = 0;
-		rank = "";
-		rankFlags = 0;
-		description = "";
-		descriptionFlags = 0;
-		tooltip = "";
-		tooltipFlags = 0;
-		manaCostPercentage = 0;
-		startRecoveryCategory = 0;
-		startRecoveryTime = 0;
-		maxTargetLevel = 0;
-		spellFamilyName = 0;
-		spellFamilyFlags = 0;
-		maxAffectedTargets = 0;
-		dmgClass = 0;
-		preventionType = 0;
-		stanceBarOrder = 0;
+		effectPointsPerComboPoint[0] = dbc.getFloat(index, 119);
+		effectPointsPerComboPoint[1] = dbc.getFloat(index, 120);
+		effectPointsPerComboPoint[2] = dbc.getFloat(index, 121);
+		
+		spellVisual = dbc.getInt(index, 122);
+		//spellVisual2 = dbc.getInt(index, 123);
+		spellIconID = dbc.getInt(index, 124);
+		activeIconID = dbc.getInt(index, 125);
+		//spellPriority = dbc.getInt(index, 126);
+		spellName = dbc.getString(index, 127); //127-142
+		//spellNameFlag = dbc.getInt(index, 143);
+		rank = dbc.getString(index, 144); //144-159
+		//rankFlags = dbc.getInt(index, 160);
+		description = dbc.getString(index, 161); //161-176
+		//descriptionFlags = dbc.getInt(index, 177);
+		tooltip = dbc.getString(index, 178); //178-193
+		//tooltipFlags = dbc.getInt(index, 194);
+		manaCostPercentage = dbc.getInt(index, 195);
+		startRecoveryCategory = dbc.getInt(index, 196);
+		startRecoveryTime = dbc.getInt(index, 197);
+		maxTargetLevel = dbc.getInt(index, 198);
+		spellFamilyName = dbc.getInt(index, 199);
+		spellFamilyFlags = dbc.getLong(index, 200); //200-201
+		maxAffectedTargets = dbc.getInt(index, 202);
+		dmgClass = dbc.getInt(index, 203);
+		preventionType = dbc.getInt(index, 204);
+		//stanceBarOrder = dbc.getInt(index, 205);
+		
 		dmgMultipliers = new int[DBC.MAX_EFFECT_INDEX];
-		minFactionID = 0;
-		minReputation = 0;
-		requiredAuraVision = 0;
+		dmgMultipliers[0] = dbc.getInt(index, 206);
+		dmgMultipliers[1] = dbc.getInt(index, 207);
+		dmgMultipliers[2] = dbc.getInt(index, 208);
+		
+		//minFactionID = dbc.getInt(index, 209);
+		//minReputation = dbc.getInt(index, 210);
+		//requiredAuraVision = dbc.getInt(index, 211);
+		
 		totemCategories = new int[DBC.MAX_TOTEM_INDEX];
-		areaID = 0;
-		schoolMask = 0;
+		totemCategories[0] = dbc.getInt(index, 212);
+		totemCategories[1] = dbc.getInt(index, 213);
+		
+		areaID = dbc.getInt(index, 214);
+		schoolMask = dbc.getInt(index, 215);
 	}
 
 	public int getID() {
@@ -311,10 +309,6 @@ public class SpellEntry {
 
 	public int getCategory() {
 		return category;
-	}
-
-	public int getCastUI() {
-		return castUI;
 	}
 
 	public int getDispel() {
@@ -463,10 +457,6 @@ public class SpellEntry {
 
 	public float getSpeed() {
 		return speed;
-	}
-
-	public int getModalNextSpell() {
-		return modalNextSpell;
 	}
 
 	public int getStackAmount() {
@@ -665,10 +655,6 @@ public class SpellEntry {
 		return spellVisual;
 	}
 
-	public int getSpellVisual2() {
-		return spellVisual2;
-	}
-
 	public int getSpellIconID() {
 		return spellIconID;
 	}
@@ -677,40 +663,20 @@ public class SpellEntry {
 		return activeIconID;
 	}
 
-	public int getSpellPriority() {
-		return spellPriority;
-	}
-
 	public String getSpellName() {
 		return spellName;
-	}
-
-	public int getSpellNameFlag() {
-		return spellNameFlag;
 	}
 
 	public String getRank() {
 		return rank;
 	}
 
-	public int getRankFlags() {
-		return rankFlags;
-	}
-
 	public String getDescription() {
 		return description;
 	}
 
-	public int getDescriptionFlags() {
-		return descriptionFlags;
-	}
-
 	public String getTooltip() {
 		return tooltip;
-	}
-
-	public int getTooltipFlags() {
-		return tooltipFlags;
 	}
 
 	public int getManaCostPercentage() {
@@ -733,7 +699,7 @@ public class SpellEntry {
 		return spellFamilyName;
 	}
 
-	public int getSpellFamilyFlags() {
+	public long getSpellFamilyFlags() {
 		return spellFamilyFlags;
 	}
 
@@ -749,28 +715,12 @@ public class SpellEntry {
 		return preventionType;
 	}
 
-	public int getStanceBarOrder() {
-		return stanceBarOrder;
-	}
-
 	public int[] getDmgMultipliers() {
 		return dmgMultipliers;
 	}
 	
 	public int getDmgMultiplier(int index) {
 		return dmgMultipliers[index];
-	}
-
-	public int getMinFactionID() {
-		return minFactionID;
-	}
-
-	public int getMinReputation() {
-		return minReputation;
-	}
-
-	public int getRequiredAuraVision() {
-		return requiredAuraVision;
 	}
 
 	public int[] getTotemCategories() {
@@ -795,11 +745,6 @@ public class SpellEntry {
 	}
 	
 	public static class Factory implements DBCEntryFactory<SpellEntry> {
-
-		@Override
-		public SpellEntry create() {
-			return new SpellEntry();
-		}
 
 		@Override
 		public SpellEntry create(int index, DBCRecord dbc) throws DBCException {

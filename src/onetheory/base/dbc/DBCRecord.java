@@ -59,6 +59,13 @@ public class DBCRecord {
 		    | ((data[offset + 3] & 0xFF) << 24);
 	}
 	
+	public long getLong(int row, int col) {
+		int offset = row * rowSize + col * fieldLen;
+		ByteBuffer bb = ByteBuffer.wrap(Arrays.copyOfRange(data, offset, offset + 8));
+		bb.order(ByteOrder.LITTLE_ENDIAN);
+		return bb.getLong();
+	}
+	
 	public float getFloat(int row, int col) {
 		return Float.intBitsToFloat(getInt(row, col));
 	}
