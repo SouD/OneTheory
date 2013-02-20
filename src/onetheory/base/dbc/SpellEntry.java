@@ -89,11 +89,11 @@ public class SpellEntry {
 	private int schoolMask;
 	
 	public SpellEntry(int index, DBCRecord dbc) throws DBCException {
-		if (dbc.getNumCols() != 216) { //Spell.dbc need 216 fields for a SpellEntry
-			throw new DBCException(String.format("Not enough DBC fields, got %d, expected %d", dbc.getNumCols(), 216));
+		int numReqFields = 216;
+		if (dbc.getNumCols() != numReqFields) { //Spell.dbc need 216 fields for a SpellEntry
+			throw new DBCException(String.format("Not enough DBC fields, got %d, expected %d", dbc.getNumCols(), numReqFields));
 		}
 		
-		//TODO: Finish constructor
 		ID = dbc.getInt(index, 0);
 		category = dbc.getInt(index, 1);
 		//castUI = dbc.getInt(index, 2);
@@ -301,6 +301,11 @@ public class SpellEntry {
 		
 		areaID = dbc.getInt(index, 214);
 		schoolMask = dbc.getInt(index, 215);
+	}
+	
+	public int calculateSimpleValue() {
+		//TODO: Implement
+		return 0;
 	}
 
 	public int getID() {
@@ -741,7 +746,7 @@ public class SpellEntry {
 	
 	@Override
 	public String toString() {
-		return String.format("Entry: %d", ID);
+		return String.format("SpellEntry: ", ID);
 	}
 	
 	public static class Factory implements DBCEntryFactory<SpellEntry> {

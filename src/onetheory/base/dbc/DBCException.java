@@ -2,6 +2,7 @@ package onetheory.base.dbc;
 
 public class DBCException extends Exception {
 	
+	private static final long serialVersionUID = 1L;
 	protected String message;
 	
 	public DBCException() {

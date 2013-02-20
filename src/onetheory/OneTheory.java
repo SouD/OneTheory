@@ -22,8 +22,6 @@ public class OneTheory {
 			SpellEntry foo = spellStore.lookupEntry(53085);
 			if (foo != null) {
 				System.out.println("DBC up to date");
-				foo = spellStore.lookupEntry(27209);
-				System.out.println(foo.getSpellName());
 			} else {
 				System.out.println("DBC not up to date");
 			}
