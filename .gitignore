@@ -1,4 +1,8 @@
-*.class
+# Folder ignores
+.settings/
 
-# Ignore DBC files #
+# File ignores
+*.class
 *.dbc
+.classpath
+.project
