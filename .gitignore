@@ -6,3 +6,5 @@
 *.dbc
 .classpath
 .project
+*.sublime-project
+*.sublime-workspace
