@@ -14,11 +14,9 @@ public class DBCRecord {
 	private int strBlockSize;
 	private byte[] data;
 	private byte[] strBlock;
-	private String fmt;
+	private int[] index;
 	
-	public DBCRecord(ByteBuffer bb, String fmt) {
-		this.fmt = fmt;
-		
+	public DBCRecord(ByteBuffer bb) {
 		bb.order(ByteOrder.LITTLE_ENDIAN);
 		
 		//Get header
@@ -36,7 +34,14 @@ public class DBCRecord {
 		bb.get(strBlock);
 		
 		//Field length always (?) 4 bytes each
-		fieldLen = rowSize / numRows;
+		fieldLen = rowSize / numCols;
+		
+		//Create index of IDs
+		index = new int[numRows];
+		for (int i = 0; i < numRows; i++) {
+			index[i] = getInt(i, 0); //0 is ID field
+		}
+		Arrays.sort(index); //Sort for binary search
 	}
 	
 	public byte[] getRow(int index) {
@@ -45,15 +50,23 @@ public class DBCRecord {
 		return Arrays.copyOfRange(data, from, to);
 	}
 	
+	
 	public int getInt(int row, int col) {
 		int offset = row * rowSize + col * fieldLen;
-		return     (data[offset] & 0xFF)
-				| ((data[offset + 1] & 0xFF) << 8)
-				| ((data[offset + 2] & 0xFF) << 16)
-				| ((data[offset + 3] & 0xFF) << 24);
+		return (data[offset] & 0xFF)
+		    | ((data[offset + 1] & 0xFF) << 8)
+		    | ((data[offset + 2] & 0xFF) << 16)
+		    | ((data[offset + 3] & 0xFF) << 24);
 	}
 	
-	public float getFloat(int col, int row) {
+	public long getLong(int row, int col) {
+		int offset = row * rowSize + col * fieldLen;
+		ByteBuffer bb = ByteBuffer.wrap(Arrays.copyOfRange(data, offset, offset + 8));
+		bb.order(ByteOrder.LITTLE_ENDIAN);
+		return bb.getLong();
+	}
+	
+	public float getFloat(int row, int col) {
 		return Float.intBitsToFloat(getInt(row, col));
 	}
 	
@@ -62,6 +75,10 @@ public class DBCRecord {
 		int to = from;
 		while(strBlock[to++] != 0) { /* Find null termination */ }
 		return new String(Arrays.copyOfRange(strBlock, from, to)).trim();
+	}
+	
+	public int findIndexByID(int id) {
+		return Arrays.binarySearch(index, id);
 	}
 
 	public String getSignature() {
@@ -83,13 +100,13 @@ public class DBCRecord {
 	public int getSize() {
 		return rowSize * numRows;
 	}
+	
+	public int getFieldLen() {
+		return fieldLen;
+	}
 
 	public int getStrBlockSize() {
 		return strBlockSize;
-	}
-
-	public String getFmt() {
-		return fmt;
 	}
 	
 	@Override

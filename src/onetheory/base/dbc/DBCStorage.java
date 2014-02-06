@@ -18,7 +18,7 @@ public class DBCStorage<T> {
 		dbc = null;
 	}
 	
-	public void load(String file, String fmt) throws Exception {
+	public void load(String file) throws Exception {
 		FileInputStream fis = null;
 		try {
 			URL u = this.getClass().getResource(dbcPath + file);
@@ -27,9 +27,8 @@ public class DBCStorage<T> {
 			fis = new FileInputStream(f);
 			fis.getChannel().read(bb);
 			bb.rewind();
-			dbc = new DBCRecord(bb, fmt);
-			System.out.println("Loaded DBC file: " + file); //Remove later
-			System.out.println(dbc.toString());
+			dbc = new DBCRecord(bb);
+			System.out.println(file + "\n" + dbc.toString());
 		} finally {
 			if (fis != null) {
 				fis.close();
@@ -37,9 +36,13 @@ public class DBCStorage<T> {
 		}
 	}
 	
-	public T lookupEntry(int id) {
-		// TODO: Find index of id
-		return factory.create(0, dbc);
+	public T lookupEntry(int id) throws DBCException {
+		int index = dbc.findIndexByID(id);
+		if (index >= 0) {
+			return factory.create(index, dbc);
+		} else {
+			return null;
+		}
 	}
 	
 	public String getDBCPath() {

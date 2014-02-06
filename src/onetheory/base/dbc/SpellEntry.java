@@ -4,7 +4,6 @@ public class SpellEntry {
 	
 	private int ID;
 	private int category;
-	private int castUI;
 	private int dispel;
 	private int mechanic;
 	private int attributes;
@@ -42,7 +41,6 @@ public class SpellEntry {
 	private int manaPerSecondLevel;
 	private int rangeIndex;
 	private float speed;
-	private int modalNextSpell;
 	private int stackAmount;
 	private int[] totems;
 	private int[] reagents;
@@ -70,138 +68,244 @@ public class SpellEntry {
 	private int[] effectTriggerSpells;
 	private float[] effectPointsPerComboPoint;
 	private int spellVisual;
-	private int spellVisual2;
 	private int spellIconID;
 	private int activeIconID;
-	private int spellPriority;
 	private String spellName;
-	private int spellNameFlag;
 	private String rank;
-	private int rankFlags;
 	private String description;
-	private int descriptionFlags;
 	private String tooltip;
-	private int tooltipFlags;
 	private int manaCostPercentage;
 	private int startRecoveryCategory;
 	private int startRecoveryTime;
 	private int maxTargetLevel;
 	private int spellFamilyName;
-	private int spellFamilyFlags;
+	private long spellFamilyFlags;
 	private int maxAffectedTargets;
 	private int dmgClass;
 	private int preventionType;
-	private int stanceBarOrder;
 	private int[] dmgMultipliers;
-	private int minFactionID;
-	private int minReputation;
-	private int requiredAuraVision;
 	private int[] totemCategories;
 	private int areaID;
 	private int schoolMask;
 	
-	public SpellEntry() {
-		ID = 0;
-		category = 0;
-		castUI = 0;
-		dispel = 0;
-		mechanic = 0;
-		attributes = 0;
-		attributesEx = 0;
-		attributesEx2 = 0;
-		attributesEx3 = 0;
-		attributesEx4 = 0;
-		attributesEx5 = 0;
-		attributesEx6 = 0;
-		stances = 0;
-		stancesNot = 0;
-		targets = 0;
-		targetCreatureType = 0;
-		requireSpellFocus = 0;
-		facingCasterFlags = 0;
-		casterAuraState = 0;
-		targetAuraState = 0;
-		castingTimeIndex = 0;
-		recoveryTime = 0;
-		categoryRecoveryTime = 0;
-		interruptFlags = 0;
-		auraInterruptFlags = 0;
-		channelInterruptFlags = 0;
-		procFlags = 0;
-		procChance = 0;
-		procCharges = 0;
-		maxLevel = 0;
-		baseLevel = 0;
-		spellLevel = 0;
-		durationIndex = 0;
-		powerType = 0;
-		manaCost = 0;
-		manaCostPerLevel = 0;
-		manaPerSecond = 0;
-		manaPerSecondLevel = 0;
-		rangeIndex = 0;
-		speed = 0.0f;
-		modalNextSpell = 0;
-		stackAmount = 0;
+	public SpellEntry(int index, DBCRecord dbc) throws DBCException {
+		int numReqFields = 216;
+		if (dbc.getNumCols() != numReqFields) { //Spell.dbc need 216 fields for a SpellEntry
+			throw new DBCException(String.format("Not enough DBC fields, got %d, expected %d", dbc.getNumCols(), numReqFields));
+		}
+		
+		ID = dbc.getInt(index, 0);
+		category = dbc.getInt(index, 1);
+		//castUI = dbc.getInt(index, 2);
+		dispel = dbc.getInt(index, 3);
+		mechanic = dbc.getInt(index, 4);
+		attributes = dbc.getInt(index, 5);
+		attributesEx = dbc.getInt(index, 6);
+		attributesEx2 = dbc.getInt(index, 7);
+		attributesEx3 = dbc.getInt(index, 8);
+		attributesEx4 = dbc.getInt(index, 9);
+		attributesEx5 = dbc.getInt(index, 10);
+		attributesEx6 = dbc.getInt(index, 11);
+		stances = dbc.getInt(index, 12);
+		stancesNot = dbc.getInt(index, 13);
+		targets = dbc.getInt(index, 14);
+		targetCreatureType = dbc.getInt(index, 15);
+		requireSpellFocus = dbc.getInt(index, 16);
+		facingCasterFlags = dbc.getInt(index, 17);
+		casterAuraState = dbc.getInt(index, 18);
+		targetAuraState = dbc.getInt(index, 19);
+		//casterAuraStateNot = dbc.getInt(index, 20);
+		//targetAuraStateNot = dbc.getInt(index, 21);
+		castingTimeIndex = dbc.getInt(index, 22);
+		recoveryTime = dbc.getInt(index, 23);
+		categoryRecoveryTime = dbc.getInt(index, 24);
+		interruptFlags = dbc.getInt(index, 25);
+		auraInterruptFlags = dbc.getInt(index, 26);
+		channelInterruptFlags = dbc.getInt(index, 27);
+		procFlags = dbc.getInt(index, 28);
+		procChance = dbc.getInt(index, 29);
+		procCharges = dbc.getInt(index, 30);
+		maxLevel = dbc.getInt(index, 31);
+		baseLevel = dbc.getInt(index, 32);
+		spellLevel = dbc.getInt(index, 33);
+		durationIndex = dbc.getInt(index, 34);
+		powerType = dbc.getInt(index, 35);
+		manaCost = dbc.getInt(index, 36);
+		manaCostPerLevel = dbc.getInt(index, 37);
+		manaPerSecond = dbc.getInt(index, 38);
+		manaPerSecondLevel = dbc.getInt(index, 39);
+		rangeIndex = dbc.getInt(index, 40);
+		speed = dbc.getFloat(index, 41);
+		//modalNextSpell = dbc.getInt(index, 42);
+		stackAmount = dbc.getInt(index, 43);
+		
 		totems = new int[DBC.MAX_TOTEM_INDEX];
+		totems[0] = dbc.getInt(index, 44);
+		totems[1] = dbc.getInt(index, 45);
+		
 		reagents = new int[DBC.MAX_REAGENT_INDEX];
+		reagents[0] = dbc.getInt(index, 46);
+		reagents[1] = dbc.getInt(index, 47);
+		reagents[2] = dbc.getInt(index, 48);
+		reagents[3] = dbc.getInt(index, 49);
+		reagents[4] = dbc.getInt(index, 50);
+		reagents[5] = dbc.getInt(index, 51);
+		reagents[6] = dbc.getInt(index, 52);
+		reagents[7] = dbc.getInt(index, 53);
+		
 		reagentCounts = new int[DBC.MAX_REAGENT_INDEX];
-		equippedItemClass = 0;
-		equippedItemSubClassMask = 0;
-		equippedItemInventoryTypeMask = 0;
+		reagentCounts[0] = dbc.getInt(index, 54);
+		reagentCounts[1] = dbc.getInt(index, 55);
+		reagentCounts[2] = dbc.getInt(index, 56);
+		reagentCounts[3] = dbc.getInt(index, 57);
+		reagentCounts[4] = dbc.getInt(index, 58);
+		reagentCounts[5] = dbc.getInt(index, 59);
+		reagentCounts[6] = dbc.getInt(index, 60);
+		reagentCounts[7] = dbc.getInt(index, 61);
+		
+		equippedItemClass = dbc.getInt(index, 62);
+		equippedItemSubClassMask = dbc.getInt(index, 63);
+		equippedItemInventoryTypeMask = dbc.getInt(index, 64);
+		
 		effects = new int[DBC.MAX_EFFECT_INDEX];
+		effects[0] = dbc.getInt(index, 65);
+		effects[1] = dbc.getInt(index, 66);
+		effects[2] = dbc.getInt(index, 67);
+		
 		effectDieSides = new int[DBC.MAX_EFFECT_INDEX];
+		effectDieSides[0] = dbc.getInt(index, 68);
+		effectDieSides[1] = dbc.getInt(index, 69);
+		effectDieSides[2] = dbc.getInt(index, 70);
+		
 		effectBaseDie = new int[DBC.MAX_EFFECT_INDEX];
+		effectBaseDie[0] = dbc.getInt(index, 71);
+		effectBaseDie[1] = dbc.getInt(index, 72);
+		effectBaseDie[2] = dbc.getInt(index, 73);
+		
 		effectDicePerLevel = new float[DBC.MAX_EFFECT_INDEX];
+		effectDicePerLevel[0] = dbc.getFloat(index, 74);
+		effectDicePerLevel[1] = dbc.getFloat(index, 75);
+		effectDicePerLevel[2] = dbc.getFloat(index, 76);
+		
 		effectRealPointsPerLevel = new float[DBC.MAX_EFFECT_INDEX];
+		effectRealPointsPerLevel[0] = dbc.getFloat(index, 77);
+		effectRealPointsPerLevel[1] = dbc.getFloat(index, 78);
+		effectRealPointsPerLevel[2] = dbc.getFloat(index, 79);
+		
 		effectBasePoints = new int[DBC.MAX_EFFECT_INDEX];
+		effectBasePoints[0] = dbc.getInt(index, 80);
+		effectBasePoints[1] = dbc.getInt(index, 81);
+		effectBasePoints[2] = dbc.getInt(index, 82);
+		
 		effectMechanics = new int[DBC.MAX_EFFECT_INDEX];
+		effectMechanics[0] = dbc.getInt(index, 83);
+		effectMechanics[1] = dbc.getInt(index, 84);
+		effectMechanics[2] = dbc.getInt(index, 85);
+		
 		effectImplicitTargetsA = new int[DBC.MAX_EFFECT_INDEX];
+		effectImplicitTargetsA[0] = dbc.getInt(index, 86);
+		effectImplicitTargetsA[1] = dbc.getInt(index, 87);
+		effectImplicitTargetsA[2] = dbc.getInt(index, 88);
+		
 		effectImplicitTargetsB = new int[DBC.MAX_EFFECT_INDEX];
+		effectImplicitTargetsB[0] = dbc.getInt(index, 89);
+		effectImplicitTargetsB[1] = dbc.getInt(index, 90);
+		effectImplicitTargetsB[2] = dbc.getInt(index, 91);
+		
 		effectRadiusIndices = new int[DBC.MAX_EFFECT_INDEX];
+		effectRadiusIndices[0] = dbc.getInt(index, 92);
+		effectRadiusIndices[1] = dbc.getInt(index, 93);
+		effectRadiusIndices[2] = dbc.getInt(index, 94);
+		
 		effectApplyAuraName = new int[DBC.MAX_EFFECT_INDEX];
+		effectApplyAuraName[0] = dbc.getInt(index, 95);
+		effectApplyAuraName[1] = dbc.getInt(index, 96);
+		effectApplyAuraName[2] = dbc.getInt(index, 97);
+		
 		effectAmplitudes = new int[DBC.MAX_EFFECT_INDEX];
+		effectAmplitudes[0] = dbc.getInt(index, 98);
+		effectAmplitudes[1] = dbc.getInt(index, 99);
+		effectAmplitudes[2] = dbc.getInt(index, 100);
+		
 		effectMultipleValues = new float[DBC.MAX_EFFECT_INDEX];
+		effectMultipleValues[0] = dbc.getFloat(index, 101);
+		effectMultipleValues[1] = dbc.getFloat(index, 102);
+		effectMultipleValues[2] = dbc.getFloat(index, 103);
+		
 		effectChainTargets = new int[DBC.MAX_EFFECT_INDEX];
+		effectChainTargets[0] = dbc.getInt(index, 104);
+		effectChainTargets[1] = dbc.getInt(index, 105);
+		effectChainTargets[2] = dbc.getInt(index, 106);
+		
 		effectItemTypes = new int[DBC.MAX_EFFECT_INDEX];
+		effectItemTypes[0] = dbc.getInt(index, 107);
+		effectItemTypes[1] = dbc.getInt(index, 108);
+		effectItemTypes[2] = dbc.getInt(index, 109);
+		
 		effectMiscValues = new int[DBC.MAX_EFFECT_INDEX];
+		effectMiscValues[0] = dbc.getInt(index, 110);
+		effectMiscValues[1] = dbc.getInt(index, 111);
+		effectMiscValues[2] = dbc.getInt(index, 112);
+		
 		effectMiscValuesB = new int[DBC.MAX_EFFECT_INDEX];
+		effectMiscValuesB[0] = dbc.getInt(index, 113);
+		effectMiscValuesB[1] = dbc.getInt(index, 114);
+		effectMiscValuesB[2] = dbc.getInt(index, 115);
+		
 		effectTriggerSpells = new int [DBC.MAX_EFFECT_INDEX];
+		effectTriggerSpells[0] = dbc.getInt(index, 116);
+		effectTriggerSpells[1] = dbc.getInt(index, 117);
+		effectTriggerSpells[2] = dbc.getInt(index, 118);
+		
 		effectPointsPerComboPoint = new float[DBC.MAX_EFFECT_INDEX];
-		spellVisual = 0;
-		spellVisual2 = 0;
-		spellIconID = 0;
-		activeIconID = 0;
-		spellPriority = 0;
-		spellName = "Unknown";
-		spellNameFlag = 0;
-		rank = "";
-		rankFlags = 0;
-		description = "";
-		descriptionFlags = 0;
-		tooltip = "";
-		tooltipFlags = 0;
-		manaCostPercentage = 0;
-		startRecoveryCategory = 0;
-		startRecoveryTime = 0;
-		maxTargetLevel = 0;
-		spellFamilyName = 0;
-		spellFamilyFlags = 0;
-		maxAffectedTargets = 0;
-		dmgClass = 0;
-		preventionType = 0;
-		stanceBarOrder = 0;
+		effectPointsPerComboPoint[0] = dbc.getFloat(index, 119);
+		effectPointsPerComboPoint[1] = dbc.getFloat(index, 120);
+		effectPointsPerComboPoint[2] = dbc.getFloat(index, 121);
+		
+		spellVisual = dbc.getInt(index, 122);
+		//spellVisual2 = dbc.getInt(index, 123);
+		spellIconID = dbc.getInt(index, 124);
+		activeIconID = dbc.getInt(index, 125);
+		//spellPriority = dbc.getInt(index, 126);
+		spellName = dbc.getString(index, 127); //127-142
+		//spellNameFlag = dbc.getInt(index, 143);
+		rank = dbc.getString(index, 144); //144-159
+		//rankFlags = dbc.getInt(index, 160);
+		description = dbc.getString(index, 161); //161-176
+		//descriptionFlags = dbc.getInt(index, 177);
+		tooltip = dbc.getString(index, 178); //178-193
+		//tooltipFlags = dbc.getInt(index, 194);
+		manaCostPercentage = dbc.getInt(index, 195);
+		startRecoveryCategory = dbc.getInt(index, 196);
+		startRecoveryTime = dbc.getInt(index, 197);
+		maxTargetLevel = dbc.getInt(index, 198);
+		spellFamilyName = dbc.getInt(index, 199);
+		spellFamilyFlags = dbc.getLong(index, 200); //200-201
+		maxAffectedTargets = dbc.getInt(index, 202);
+		dmgClass = dbc.getInt(index, 203);
+		preventionType = dbc.getInt(index, 204);
+		//stanceBarOrder = dbc.getInt(index, 205);
+		
 		dmgMultipliers = new int[DBC.MAX_EFFECT_INDEX];
-		minFactionID = 0;
-		minReputation = 0;
-		requiredAuraVision = 0;
+		dmgMultipliers[0] = dbc.getInt(index, 206);
+		dmgMultipliers[1] = dbc.getInt(index, 207);
+		dmgMultipliers[2] = dbc.getInt(index, 208);
+		
+		//minFactionID = dbc.getInt(index, 209);
+		//minReputation = dbc.getInt(index, 210);
+		//requiredAuraVision = dbc.getInt(index, 211);
+		
 		totemCategories = new int[DBC.MAX_TOTEM_INDEX];
-		areaID = 0;
-		schoolMask = 0;
+		totemCategories[0] = dbc.getInt(index, 212);
+		totemCategories[1] = dbc.getInt(index, 213);
+		
+		areaID = dbc.getInt(index, 214);
+		schoolMask = dbc.getInt(index, 215);
 	}
 	
-	public SpellEntry(int index, DBCRecord dbc) {
-		System.out.println("Not yet implemented!");
+	public int calculateSimpleValue() {
+		//TODO: Implement
+		return 0;
 	}
 
 	public int getID() {
@@ -210,10 +314,6 @@ public class SpellEntry {
 
 	public int getCategory() {
 		return category;
-	}
-
-	public int getCastUI() {
-		return castUI;
 	}
 
 	public int getDispel() {
@@ -364,10 +464,6 @@ public class SpellEntry {
 		return speed;
 	}
 
-	public int getModalNextSpell() {
-		return modalNextSpell;
-	}
-
 	public int getStackAmount() {
 		return stackAmount;
 	}
@@ -376,7 +472,7 @@ public class SpellEntry {
 		return totems;
 	}
 	
-	public int getTotem(int index) throws ArrayIndexOutOfBoundsException {
+	public int getTotem(int index) {
 		return totems[index];
 	}
 
@@ -384,7 +480,7 @@ public class SpellEntry {
 		return reagents;
 	}
 	
-	public int getReagent(int index) throws ArrayIndexOutOfBoundsException {
+	public int getReagent(int index) {
 		return reagents[index];
 	}
 
@@ -392,7 +488,7 @@ public class SpellEntry {
 		return reagentCounts;
 	}
 	
-	public int getReagentCount(int index) throws ArrayIndexOutOfBoundsException {
+	public int getReagentCount(int index) {
 		return reagentCounts[index];
 	}
 
@@ -412,7 +508,7 @@ public class SpellEntry {
 		return effects;
 	}
 	
-	public int getEffect(int index) throws ArrayIndexOutOfBoundsException {
+	public int getEffect(int index) {
 		return effects[index];
 	}
 
@@ -420,7 +516,7 @@ public class SpellEntry {
 		return effectDieSides;
 	}
 	
-	public int getEffectDiceSide(int index)  throws ArrayIndexOutOfBoundsException {
+	public int getEffectDiceSide(int index)  {
 		return effectDieSides[index];
 	}
 
@@ -428,7 +524,7 @@ public class SpellEntry {
 		return effectBaseDie;
 	}
 	
-	public int getEffectBaseDice(int index) throws ArrayIndexOutOfBoundsException {
+	public int getEffectBaseDice(int index) {
 		return effectBaseDie[index];
 	}
 
@@ -436,7 +532,7 @@ public class SpellEntry {
 		return effectDicePerLevel;
 	}
 	
-	public float getEffectDicePerLevel(int index) throws ArrayIndexOutOfBoundsException {
+	public float getEffectDicePerLevel(int index) {
 		return effectDicePerLevel[index];
 	}
 
@@ -444,7 +540,7 @@ public class SpellEntry {
 		return effectRealPointsPerLevel;
 	}
 	
-	public float getEffectRealPointsPerLevel(int index) throws ArrayIndexOutOfBoundsException {
+	public float getEffectRealPointsPerLevel(int index) {
 		return effectRealPointsPerLevel[index];
 	}
 
@@ -452,7 +548,7 @@ public class SpellEntry {
 		return effectBasePoints;
 	}
 	
-	public int getEffectBasePoints(int index) throws ArrayIndexOutOfBoundsException {
+	public int getEffectBasePoints(int index) {
 		return effectBasePoints[index];
 	}
 
@@ -460,7 +556,7 @@ public class SpellEntry {
 		return effectMechanics;
 	}
 	
-	public int getEffectMechanic(int index) throws ArrayIndexOutOfBoundsException {
+	public int getEffectMechanic(int index) {
 		return effectMechanics[index];
 	}
 
@@ -468,7 +564,7 @@ public class SpellEntry {
 		return effectImplicitTargetsA;
 	}
 	
-	public int getEffectImplicitTargetA(int index) throws ArrayIndexOutOfBoundsException {
+	public int getEffectImplicitTargetA(int index) {
 		return effectImplicitTargetsA[index];
 	}
 
@@ -476,7 +572,7 @@ public class SpellEntry {
 		return effectImplicitTargetsB;
 	}
 	
-	public int getEffectImplicitTargetB(int index) throws ArrayIndexOutOfBoundsException {
+	public int getEffectImplicitTargetB(int index) {
 		return effectImplicitTargetsB[index];
 	}
 
@@ -484,7 +580,7 @@ public class SpellEntry {
 		return effectRadiusIndices;
 	}
 	
-	public int getEffectRadiusIndex(int index) throws ArrayIndexOutOfBoundsException {
+	public int getEffectRadiusIndex(int index) {
 		return effectRadiusIndices[index];
 	}
 
@@ -492,7 +588,7 @@ public class SpellEntry {
 		return effectApplyAuraName;
 	}
 	
-	public int getEffectApplyAuraName(int index) throws ArrayIndexOutOfBoundsException {
+	public int getEffectApplyAuraName(int index) {
 		return effectApplyAuraName[index];
 	}
 
@@ -500,7 +596,7 @@ public class SpellEntry {
 		return effectAmplitudes;
 	}
 	
-	public int getEffectAmplitude(int index) throws ArrayIndexOutOfBoundsException {
+	public int getEffectAmplitude(int index) {
 		return effectAmplitudes[index];
 	}
 
@@ -508,7 +604,7 @@ public class SpellEntry {
 		return effectMultipleValues;
 	}
 	
-	public float getEffectMultipleValue(int index) throws ArrayIndexOutOfBoundsException {
+	public float getEffectMultipleValue(int index) {
 		return effectMultipleValues[index];
 	}
 
@@ -516,7 +612,7 @@ public class SpellEntry {
 		return effectChainTargets;
 	}
 	
-	public int getEffectChainTarget(int index) throws ArrayIndexOutOfBoundsException {
+	public int getEffectChainTarget(int index) {
 		return effectChainTargets[index];
 	}
 
@@ -524,7 +620,7 @@ public class SpellEntry {
 		return effectItemTypes;
 	}
 	
-	public int getEffectItemType(int index) throws ArrayIndexOutOfBoundsException {
+	public int getEffectItemType(int index) {
 		return effectItemTypes[index];
 	}
 
@@ -532,7 +628,7 @@ public class SpellEntry {
 		return effectMiscValues;
 	}
 	
-	public int getEffectMiscValue(int index) throws ArrayIndexOutOfBoundsException {
+	public int getEffectMiscValue(int index) {
 		return effectMiscValues[index];
 	}
 
@@ -540,7 +636,7 @@ public class SpellEntry {
 		return effectMiscValuesB;
 	}
 	
-	public int getEffectMiscValueB(int index) throws ArrayIndexOutOfBoundsException {
+	public int getEffectMiscValueB(int index) {
 		return effectMiscValuesB[index];
 	}
 
@@ -548,7 +644,7 @@ public class SpellEntry {
 		return effectTriggerSpells;
 	}
 	
-	public int getEffectTriggerSpells(int index) throws ArrayIndexOutOfBoundsException {
+	public int getEffectTriggerSpells(int index) {
 		return effectTriggerSpells[index];
 	}
 
@@ -556,16 +652,12 @@ public class SpellEntry {
 		return effectPointsPerComboPoint;
 	}
 	
-	public float getEffectPointsPerComboPoints(int index) throws ArrayIndexOutOfBoundsException {
+	public float getEffectPointsPerComboPoints(int index) {
 		return effectPointsPerComboPoint[index];
 	}
 
 	public int getSpellVisual() {
 		return spellVisual;
-	}
-
-	public int getSpellVisual2() {
-		return spellVisual2;
 	}
 
 	public int getSpellIconID() {
@@ -576,40 +668,20 @@ public class SpellEntry {
 		return activeIconID;
 	}
 
-	public int getSpellPriority() {
-		return spellPriority;
-	}
-
 	public String getSpellName() {
 		return spellName;
-	}
-
-	public int getSpellNameFlag() {
-		return spellNameFlag;
 	}
 
 	public String getRank() {
 		return rank;
 	}
 
-	public int getRankFlags() {
-		return rankFlags;
-	}
-
 	public String getDescription() {
 		return description;
 	}
 
-	public int getDescriptionFlags() {
-		return descriptionFlags;
-	}
-
 	public String getTooltip() {
 		return tooltip;
-	}
-
-	public int getTooltipFlags() {
-		return tooltipFlags;
 	}
 
 	public int getManaCostPercentage() {
@@ -632,7 +704,7 @@ public class SpellEntry {
 		return spellFamilyName;
 	}
 
-	public int getSpellFamilyFlags() {
+	public long getSpellFamilyFlags() {
 		return spellFamilyFlags;
 	}
 
@@ -648,35 +720,19 @@ public class SpellEntry {
 		return preventionType;
 	}
 
-	public int getStanceBarOrder() {
-		return stanceBarOrder;
-	}
-
 	public int[] getDmgMultipliers() {
 		return dmgMultipliers;
 	}
 	
-	public int getDmgMultiplier(int index) throws ArrayIndexOutOfBoundsException {
+	public int getDmgMultiplier(int index) {
 		return dmgMultipliers[index];
-	}
-
-	public int getMinFactionID() {
-		return minFactionID;
-	}
-
-	public int getMinReputation() {
-		return minReputation;
-	}
-
-	public int getRequiredAuraVision() {
-		return requiredAuraVision;
 	}
 
 	public int[] getTotemCategories() {
 		return totemCategories;
 	}
 	
-	public int getTotemCategory(int index) throws ArrayIndexOutOfBoundsException {
+	public int getTotemCategory(int index) {
 		return totemCategories[index];
 	}
 
@@ -690,18 +746,13 @@ public class SpellEntry {
 	
 	@Override
 	public String toString() {
-		return String.format("Entry: %d", ID);
+		return String.format("SpellEntry: ", ID);
 	}
 	
 	public static class Factory implements DBCEntryFactory<SpellEntry> {
 
 		@Override
-		public SpellEntry create() {
-			return new SpellEntry();
-		}
-
-		@Override
-		public SpellEntry create(int index, DBCRecord dbc) {
+		public SpellEntry create(int index, DBCRecord dbc) throws DBCException {
 			return new SpellEntry(index, dbc);
 		}
 		
