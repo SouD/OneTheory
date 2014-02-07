@@ -8,7 +8,7 @@ public class App {
     EventQueue.invokeLater(new Runnable() {
       public void run() {
         try {
-          OneTheory ot = new OneTheory();
+          new OneTheory();
         } catch (Exception e) {
           e.printStackTrace();
         }

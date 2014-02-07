@@ -1,5 +1,6 @@
 # Folder ignores
 .settings/
+bin/
 
 # File ignores
 *.class
